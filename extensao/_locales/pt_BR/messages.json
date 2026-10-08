@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "FollowTidy"
+  },
+  "extDescription": {
+    "message": "Lista quem você segue e quem te segue, mostra quem não segue de volta e deixa de seguir ou remove várias contas com calma."
+  },
+  "actionTitle": {
+    "message": "Abrir o FollowTidy"
+  }
+}
