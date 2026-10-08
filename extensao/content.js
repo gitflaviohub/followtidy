@@ -39,6 +39,163 @@
     String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const key = (u) => u.username.toLowerCase();
 
+  // ---------- idiomas ----------
+  const STR = {
+    pt: {
+      blocked: 'O Instagram pediu para abrandar. Parei tudo; tente de novo daqui a algumas horas.',
+      badSession: 'Sessão inválida. Entre na sua conta do Instagram neste navegador e tente de novo.',
+      unexpected: (path, st, snip) => `Resposta inesperada em ${path} (${st}): ${snip}`,
+      failed: (path, st, why) => `Pedido falhou em ${path} (${st}: ${why}).`,
+      noSession: 'Não encontrei a sessão. Entre na sua conta do Instagram neste navegador.',
+      loading: (kind, n) => `A carregar ${kind === 'following' ? 'quem você segue' : 'seguidores'}: ${n}…`,
+      cancelled: 'Carregamento cancelado.',
+      ready: (a, b) => `Pronto: segue ${a}, seguidores ${b}.`,
+      badJson: (name) => `${name} não é um JSON válido.`,
+      unknownFiles: 'Não reconheci os ficheiros. Use following.json e followers_1.json da exportação.',
+      imported: (a, b) => `Importado: segue ${a}, seguidores ${b}.`,
+      profileNotFound: (u) => `Não encontrei o perfil @${u}.`,
+      noPath: (msg) => `Nenhum caminho do Instagram funcionou. ${msg}`,
+      following_verb: 'Deixar de seguir',
+      following_doing: 'A deixar de seguir',
+      following_done: 'Deixou de seguir',
+      followers_verb: 'Remover seguidor',
+      followers_doing: 'A remover',
+      followers_done: 'Removeu',
+      stopped: (done, n) => `Parado. ${done} ${n} conta(s).`,
+      dailyLimit: (n) => `Limite diário (${n}) atingido. Continue amanhã.`,
+      dailyLimitBefore: (n, doing, u) => `Limite diário (${n}) atingido antes de ${doing} @${u}.`,
+      secondIn: (verb, u) => `${verb} @${u} em`,
+      nextIn: (done, i, n) => `${done} ${i}/${n}. Próxima em`,
+      finished: (done, n, otherDone, extra) => `Concluído: ${done} ${n} conta(s)${extra ? ` e ${otherDone} ${extra} (mútuos)` : ''}.`,
+      errDone: (msg, n) => `${msg} (feitas: ${n})`,
+      csvHeader: ['username', 'nome', 'id', 'privado', 'verificado', 'desde'],
+      stopping: 'A parar…',
+      language: 'Idioma',
+      close: 'Fechar',
+      refresh: 'Carregar do Instagram',
+      import: 'Importar exportação (JSON)',
+      csv: 'Exportar CSV',
+      cancel: 'Cancelar',
+      updated: (d) => `Atualizado ${d}`,
+      noData: 'Sem dados ainda',
+      tabFollowing: (n) => `Seguindo (${n})`,
+      tabFollowers: (n) => `Seguidores (${n})`,
+      all: 'Todos',
+      notBackFollowing: 'Não me seguem de volta',
+      notBackFollowers: 'Eu não sigo de volta',
+      mutualOnly: 'Só mútuos',
+      sortTitle: 'Ordem',
+      recent: 'Mais recentes primeiro',
+      oldest: 'Mais antigos primeiro',
+      searchPh: 'Procurar por nome ou @',
+      count: (n) => `${n} conta(s)`,
+      selVisible: 'Selecionar visíveis',
+      clear: 'Limpar',
+      selected: (n) => `<b>${n}</b> selecionada(s)`,
+      bothTitle: 'Nas contas mútuas, faz as duas ações: deixa de seguir e remove dos seguidores',
+      bothFollowing: 'Nos mútuos, remover também dos seguidores',
+      bothFollowers: 'Nos mútuos, deixar também de seguir',
+      stop: 'Parar',
+      verified: 'Verificado',
+      private: 'Privado',
+      since: (d) => `desde ${d}`,
+      tagMutual: 'Mútuo',
+      tagNotFollowingYou: 'Não te segue',
+      tagNotFollowing: 'Não segues',
+      emptyFilter: 'Nada com estes filtros.',
+      emptyNoData: 'Clique em “Carregar do Instagram” ou importe a exportação oficial.',
+      more: (n) => `Mostrar mais (${n} restantes)`,
+      pace: (c, l) => `Ritmo e limites (hoje: ${c}/${l})`,
+      minDelay: 'Espera mínima (s)',
+      maxDelay: 'Espera máxima (s)',
+      perDay: 'Limite por dia',
+      paceNote: 'Ritmo lento reduz o risco de bloqueio. Se o Instagram pedir para abrandar, a fila para sozinha.',
+      disclaimer: 'O FollowTidy não tem qualquer ligação ao Instagram ou à Meta. Os dados ficam só neste navegador.',
+      confirmRun: (verb, n, min, max) => `${verb}: ${n} conta(s), uma a cada ${min}–${max}s?`,
+      confirmExtra: (mut, otherVerb, total) => `\n\nNas ${mut} conta(s) mútua(s), também: ${otherVerb} (${total} ações no total).`,
+    },
+    en: {
+      blocked: 'Instagram asked to slow down. Everything stopped; try again in a few hours.',
+      badSession: 'Invalid session. Log in to Instagram in this browser and try again.',
+      unexpected: (path, st, snip) => `Unexpected response at ${path} (${st}): ${snip}`,
+      failed: (path, st, why) => `Request failed at ${path} (${st}: ${why}).`,
+      noSession: 'No session found. Log in to Instagram in this browser.',
+      loading: (kind, n) => `Loading ${kind === 'following' ? 'accounts you follow' : 'followers'}: ${n}…`,
+      cancelled: 'Loading cancelled.',
+      ready: (a, b) => `Done: following ${a}, followers ${b}.`,
+      badJson: (name) => `${name} is not valid JSON.`,
+      unknownFiles: "Couldn't recognise the files. Use following.json and followers_1.json from the data export.",
+      imported: (a, b) => `Imported: following ${a}, followers ${b}.`,
+      profileNotFound: (u) => `Profile @${u} not found.`,
+      noPath: (msg) => `No Instagram endpoint worked. ${msg}`,
+      following_verb: 'Unfollow',
+      following_doing: 'Unfollowing',
+      following_done: 'Unfollowed',
+      followers_verb: 'Remove follower',
+      followers_doing: 'Removing',
+      followers_done: 'Removed',
+      stopped: (done, n) => `Stopped. ${done} ${n} account(s).`,
+      dailyLimit: (n) => `Daily limit (${n}) reached. Continue tomorrow.`,
+      dailyLimitBefore: (n, doing, u) => `Daily limit (${n}) reached before ${doing} @${u}.`,
+      secondIn: (verb, u) => `${verb} @${u} in`,
+      nextIn: (done, i, n) => `${done} ${i}/${n}. Next in`,
+      finished: (done, n, otherDone, extra) => `Done: ${done} ${n} account(s)${extra ? ` and ${otherDone} ${extra} (mutuals)` : ''}.`,
+      errDone: (msg, n) => `${msg} (done: ${n})`,
+      csvHeader: ['username', 'name', 'id', 'private', 'verified', 'since'],
+      stopping: 'Stopping…',
+      language: 'Language',
+      close: 'Close',
+      refresh: 'Load from Instagram',
+      import: 'Import data export (JSON)',
+      csv: 'Export CSV',
+      cancel: 'Cancel',
+      updated: (d) => `Updated ${d}`,
+      noData: 'No data yet',
+      tabFollowing: (n) => `Following (${n})`,
+      tabFollowers: (n) => `Followers (${n})`,
+      all: 'All',
+      notBackFollowing: "Don't follow me back",
+      notBackFollowers: "I don't follow back",
+      mutualOnly: 'Mutuals only',
+      sortTitle: 'Order',
+      recent: 'Newest first',
+      oldest: 'Oldest first',
+      searchPh: 'Search by name or @',
+      count: (n) => `${n} account(s)`,
+      selVisible: 'Select visible',
+      clear: 'Clear',
+      selected: (n) => `<b>${n}</b> selected`,
+      bothTitle: 'For mutual accounts, do both actions: unfollow and remove from followers',
+      bothFollowing: 'For mutuals, also remove from followers',
+      bothFollowers: 'For mutuals, also unfollow',
+      stop: 'Stop',
+      verified: 'Verified',
+      private: 'Private',
+      since: (d) => `since ${d}`,
+      tagMutual: 'Mutual',
+      tagNotFollowingYou: "Doesn't follow you",
+      tagNotFollowing: "You don't follow",
+      emptyFilter: 'Nothing matches these filters.',
+      emptyNoData: 'Click “Load from Instagram” or import the official data export.',
+      more: (n) => `Show more (${n} left)`,
+      pace: (c, l) => `Pace and limits (today: ${c}/${l})`,
+      minDelay: 'Minimum wait (s)',
+      maxDelay: 'Maximum wait (s)',
+      perDay: 'Daily limit',
+      paceNote: 'A slow pace lowers the risk of blocks. If Instagram asks to slow down, the queue stops by itself.',
+      disclaimer: 'FollowTidy is not affiliated with Instagram or Meta. Your data stays in this browser only.',
+      confirmRun: (verb, n, min, max) => `${verb}: ${n} account(s), one every ${min}–${max}s?`,
+      confirmExtra: (mut, otherVerb, total) => `\n\nFor the ${mut} mutual account(s), also: ${otherVerb} (${total} actions in total).`,
+    },
+  };
+  // Idioma escolhido no painel; sem escolha, segue o idioma do navegador.
+  const lang = () => state.settings.lang || (String(navigator.language).toLowerCase().startsWith('pt') ? 'pt' : 'en');
+  const locale = () => (lang() === 'pt' ? 'pt-BR' : 'en-US');
+  function t(k, ...args) {
+    const v = STR[lang()][k] ?? STR.pt[k];
+    return typeof v === 'function' ? v(...args) : v;
+  }
+
   function getCookie(name) {
     const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : null;
@@ -73,17 +230,17 @@
       /* resposta sem JSON */
     }
     if (res.status === 429 || (data && (data.spam || data.message === 'feedback_required' || data.message === 'rate_limited'))) {
-      throw new BlockedError('O Instagram pediu para abrandar. Parei tudo; tente de novo daqui a algumas horas.');
+      throw new BlockedError(t('blocked'));
     }
     if (res.status === 401 || res.status === 403 || (data && data.message === 'login_required')) {
-      throw new Error('Sessão inválida. Entre na sua conta do Instagram neste navegador e tente de novo.');
+      throw new Error(t('badSession'));
     }
     if (res.status === 404 || (res.ok && !data)) {
-      throw new EndpointError(`Resposta inesperada em ${path} (${res.status}): ${text.slice(0, 80).replace(/\s+/g, ' ')}`);
+      throw new EndpointError(t('unexpected', path, res.status, text.slice(0, 80).replace(/\s+/g, ' ')));
     }
     if (!res.ok || !data || data.status === 'fail') {
       const why = (data && (data.message || data.error_type)) || text.slice(0, 120).replace(/\s+/g, ' ');
-      throw new Error(`Pedido falhou em ${path} (${res.status}: ${why}).`);
+      throw new Error(t('failed', path, res.status, why));
     }
     return data;
   }
@@ -114,7 +271,7 @@
   // ---------- carregar listas pela sessão ----------
   async function fetchList(kind) {
     const uid = getCookie('ds_user_id');
-    if (!uid) throw new Error('Não encontrei a sessão. Entre na sua conta do Instagram neste navegador.');
+    if (!uid) throw new Error(t('noSession'));
     const out = [];
     let maxId = null;
     do {
@@ -124,8 +281,8 @@
       const data = await api(path);
       for (const u of data.users || []) out.push(normalizeUser(u));
       maxId = data.next_max_id || null;
-      setStatus(`A carregar ${kind === 'following' ? 'quem você segue' : 'seguidores'}: ${out.length}…`);
-      if (state.stopRequested) throw new Error('Carregamento cancelado.');
+      setStatus(t('loading', kind, out.length));
+      if (state.stopRequested) throw new Error(t('cancelled'));
       if (maxId) await sleep(rand(1500, 3500)); // ritmo humano entre páginas
     } while (maxId);
     return out;
@@ -143,7 +300,7 @@
       state.updatedAt = new Date().toISOString();
       state.selected.clear();
       await saveLists();
-      setStatus(`Pronto: segue ${state.following.length}, seguidores ${state.followers.length}.`, 'ok');
+      setStatus(t('ready', state.following.length, state.followers.length), 'ok');
     } catch (e) {
       setStatus(e.message, 'err');
     } finally {
@@ -173,7 +330,7 @@
       try {
         json = JSON.parse(await f.text());
       } catch {
-        setStatus(`${f.name} não é um JSON válido.`, 'err');
+        setStatus(t('badJson', f.name), 'err');
         return;
       }
       if (json && json.relationships_following) {
@@ -187,7 +344,7 @@
       }
     }
     if (!gotFollowing && !foundFollowers) {
-      setStatus('Não reconheci os ficheiros. Use following.json e followers_1.json da exportação.', 'err');
+      setStatus(t('unknownFiles'), 'err');
       return;
     }
     if (gotFollowing) state.following = gotFollowing;
@@ -195,7 +352,7 @@
     state.updatedAt = new Date().toISOString();
     state.selected.clear();
     await saveLists();
-    setStatus(`Importado: segue ${state.following.length}, seguidores ${state.followers.length}.`, 'ok');
+    setStatus(t('imported', state.following.length, state.followers.length), 'ok');
     render();
   }
 
@@ -203,7 +360,7 @@
   async function resolveId(username) {
     const data = await api(`/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`);
     const id = data && data.data && data.data.user && data.data.user.id;
-    if (!id) throw new Error(`Não encontrei o perfil @${username}.`);
+    if (!id) throw new Error(t('profileNotFound', username));
     return String(id);
   }
 
@@ -238,17 +395,21 @@
         lastErr = e;
       }
     }
-    throw new Error(`Nenhum caminho do Instagram funcionou. ${lastErr.message}`);
+    throw new Error(t('noPath', lastErr.message));
   }
 
   const unfollow = (user) => postAction('unfollow', user);
   const removeFollower = (user) => postAction('remove', user);
 
   // Textos e ação de cada aba: "following" deixa de seguir, "followers" remove o seguidor.
-  const ACTIONS = {
-    following: { run: unfollow, verb: 'Deixar de seguir', doing: 'A deixar de seguir', done: 'Deixou de seguir' },
-    followers: { run: removeFollower, verb: 'Remover seguidor', doing: 'A remover', done: 'Removeu' },
-  };
+  // Os textos vêm do dicionário no idioma atual.
+  const actionOf = (kind, run) => ({
+    run,
+    get verb() { return t(`${kind}_verb`); },
+    get doing() { return t(`${kind}_doing`); },
+    get done() { return t(`${kind}_done`); },
+  });
+  const ACTIONS = { following: actionOf('following', unfollow), followers: actionOf('followers', removeFollower) };
 
   const OTHER = { following: 'followers', followers: 'following' };
 
@@ -276,11 +437,11 @@
     try {
       for (const user of queue) {
         if (state.stopRequested) {
-          setStatus(`Parado. ${action.done} ${done} conta(s).`, 'ok');
+          setStatus(t('stopped', action.done, done), 'ok');
           break;
         }
         if (state.daily.count >= state.settings.dailyLimit) {
-          setStatus(`Limite diário (${state.settings.dailyLimit}) atingido. Continue amanhã.`, 'err');
+          setStatus(t('dailyLimit', state.settings.dailyLimit), 'err');
           break;
         }
         setStatus(`${action.doing} @${user.username}… (${done + 1}/${queue.length})`);
@@ -296,10 +457,10 @@
         // Mútuo com "cortar ligação": fazer também a ação inversa, após uma pausa curta.
         if (mutual && !state.stopRequested) {
           if (state.daily.count >= state.settings.dailyLimit) {
-            setStatus(`Limite diário (${state.settings.dailyLimit}) atingido antes de ${ACTIONS[other].doing.toLowerCase()} @${user.username}.`, 'err');
+            setStatus(t('dailyLimitBefore', state.settings.dailyLimit, ACTIONS[other].doing.toLowerCase(), user.username), 'err');
             break;
           }
-          await countdown(rand(5, 12), `${ACTIONS[other].verb} @${user.username} em`);
+          await countdown(rand(5, 12), t('secondIn', ACTIONS[other].verb, user.username));
           if (state.stopRequested) break;
           setStatus(`${ACTIONS[other].doing} @${user.username}…`);
           const twin = state[other].find((u) => key(u) === key(user));
@@ -313,12 +474,12 @@
           render();
         }
         if (done < queue.length) {
-          await countdown(rand(state.settings.minDelay, state.settings.maxDelay), `${action.done} ${done}/${queue.length}. Próxima em`);
+          await countdown(rand(state.settings.minDelay, state.settings.maxDelay), t('nextIn', action.done, done, queue.length));
         }
       }
-      if (!state.stopRequested && done === queue.length) setStatus(`Concluído: ${action.done.toLowerCase()} ${done} conta(s)${extra ? ` e ${ACTIONS[other].done.toLowerCase()} ${extra} (mútuos)` : ''}.`, 'ok');
+      if (!state.stopRequested && done === queue.length) setStatus(t('finished', action.done.toLowerCase(), done, ACTIONS[other].done.toLowerCase(), extra), 'ok');
     } catch (e) {
-      setStatus(`${e.message} (feitas: ${done})`, 'err');
+      setStatus(t('errDone', e.message, done), 'err');
     } finally {
       state.running = false;
       render();
@@ -343,7 +504,7 @@
 
   function exportCsv() {
     const { list } = currentList();
-    const rows = [['username', 'nome', 'id', 'privado', 'verificado', 'desde']].concat(
+    const rows = [t('csvHeader')].concat(
       list.map((u) => [u.username, u.full_name, u.id, u.is_private, u.is_verified, u.ts ? new Date(u.ts * 1000).toISOString().slice(0, 10) : ''])
     );
     const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -435,43 +596,49 @@
     panel.innerHTML = `
       <header>
         <h1>FollowTidy</h1>
-        <button class="icon" data-act="close" aria-label="Fechar">✕</button>
+        <div class="head-actions">
+          <select class="lang" title="${t('language')}" aria-label="${t('language')}">
+            <option value="pt" ${lang() === 'pt' ? 'selected' : ''}>PT</option>
+            <option value="en" ${lang() === 'en' ? 'selected' : ''}>EN</option>
+          </select>
+          <button class="icon" data-act="close" aria-label="${t('close')}">✕</button>
+        </div>
       </header>
       <div class="toolbar">
-        <button data-act="refresh" ${locked ? 'disabled' : ''}>Carregar do Instagram</button>
-        <label class="btn">Importar exportação (JSON)<input type="file" accept=".json,application/json" multiple class="import" hidden ${locked ? 'disabled' : ''}></label>
-        <button data-act="csv" ${list.length ? '' : 'disabled'}>Exportar CSV</button>
-        ${state.busy ? '<button data-act="stop" class="danger">Cancelar</button>' : ''}
-        <span class="muted">${state.updatedAt ? 'Atualizado ' + new Date(state.updatedAt).toLocaleString() : 'Sem dados ainda'}</span>
+        <button data-act="refresh" ${locked ? 'disabled' : ''}>${t('refresh')}</button>
+        <label class="btn">${t('import')}<input type="file" accept=".json,application/json" multiple class="import" hidden ${locked ? 'disabled' : ''}></label>
+        <button data-act="csv" ${list.length ? '' : 'disabled'}>${t('csv')}</button>
+        ${state.busy ? `<button data-act="stop" class="danger">${t('cancel')}</button>` : ''}
+        <span class="muted">${state.updatedAt ? t('updated', new Date(state.updatedAt).toLocaleString(locale())) : t('noData')}</span>
       </div>
       <nav class="tabs">
-        <button data-tab="following" class="${isFollowing ? 'on' : ''}" ${locked ? 'disabled' : ''}>Seguindo (${state.following.length})</button>
-        <button data-tab="followers" class="${!isFollowing ? 'on' : ''}" ${locked ? 'disabled' : ''}>Seguidores (${state.followers.length})</button>
+        <button data-tab="following" class="${isFollowing ? 'on' : ''}" ${locked ? 'disabled' : ''}>${t('tabFollowing', state.following.length)}</button>
+        <button data-tab="followers" class="${!isFollowing ? 'on' : ''}" ${locked ? 'disabled' : ''}>${t('tabFollowers', state.followers.length)}</button>
       </nav>
       <div class="filters">
         <select class="filter">
-          <option value="all" ${state.filter === 'all' ? 'selected' : ''}>Todos</option>
-          <option value="notBack" ${state.filter === 'notBack' ? 'selected' : ''}>${isFollowing ? 'Não me seguem de volta' : 'Eu não sigo de volta'}</option>
-          <option value="mutual" ${state.filter === 'mutual' ? 'selected' : ''}>Só mútuos</option>
+          <option value="all" ${state.filter === 'all' ? 'selected' : ''}>${t('all')}</option>
+          <option value="notBack" ${state.filter === 'notBack' ? 'selected' : ''}>${isFollowing ? t('notBackFollowing') : t('notBackFollowers')}</option>
+          <option value="mutual" ${state.filter === 'mutual' ? 'selected' : ''}>${t('mutualOnly')}</option>
         </select>
-        <select class="sort" title="Ordem">
-          <option value="recent" ${state.sort === 'recent' ? 'selected' : ''}>Mais recentes primeiro</option>
-          <option value="oldest" ${state.sort === 'oldest' ? 'selected' : ''}>Mais antigos primeiro</option>
+        <select class="sort" title="${t('sortTitle')}">
+          <option value="recent" ${state.sort === 'recent' ? 'selected' : ''}>${t('recent')}</option>
+          <option value="oldest" ${state.sort === 'oldest' ? 'selected' : ''}>${t('oldest')}</option>
         </select>
-        <input class="search" type="search" placeholder="Procurar por nome ou @" value="${esc(state.search)}">
-        <span class="muted">${list.length} conta(s)</span>
+        <input class="search" type="search" placeholder="${t('searchPh')}" value="${esc(state.search)}">
+        <span class="muted">${t('count', list.length)}</span>
       </div>
       <div class="selbar">
-              <label><input type="checkbox" class="selall" ${allVisibleSelected ? 'checked' : ''} ${locked ? 'disabled' : ''}> Selecionar visíveis</label>
-              <button data-act="selnone" ${selCount && !locked ? '' : 'disabled'}>Limpar</button>
-              <span><b>${selCount}</b> selecionada(s)</span>
-              <label class="both" title="Nas contas mútuas, faz as duas ações: deixa de seguir e remove dos seguidores">
+              <label><input type="checkbox" class="selall" ${allVisibleSelected ? 'checked' : ''} ${locked ? 'disabled' : ''}> ${t('selVisible')}</label>
+              <button data-act="selnone" ${selCount && !locked ? '' : 'disabled'}>${t('clear')}</button>
+              <span>${t('selected', selCount)}</span>
+              <label class="both" title="${t('bothTitle')}">
                 <input type="checkbox" class="bothchk" ${state.both ? 'checked' : ''} ${locked ? 'disabled' : ''}>
-                ${isFollowing ? 'Nos mútuos, remover também dos seguidores' : 'Nos mútuos, deixar também de seguir'}${selMutual ? ` (${selMutual})` : ''}
+                ${isFollowing ? t('bothFollowing') : t('bothFollowers')}${selMutual ? ` (${selMutual})` : ''}
               </label>
               ${
                 state.running
-                  ? '<button data-act="stop" class="danger">Parar</button>'
+                  ? `<button data-act="stop" class="danger">${t('stop')}</button>`
                   : `<button data-act="run" class="primary" ${selCount && !locked ? '' : 'disabled'}>${ACTIONS[state.tab].verb} ${selCount || ''}</button>`
               }
       </div>
@@ -486,26 +653,26 @@
                     <input type="checkbox" class="sel" data-k="${esc(k)}" ${state.selected.has(k) ? 'checked' : ''} ${locked ? 'disabled' : ''}>
                     ${picHtml(u)}
                     <div class="who">
-                      <a href="${BASE}/${esc(u.username)}/" target="_blank" rel="noopener">@${esc(u.username)}</a>${u.is_verified ? ' <span title="Verificado">✔</span>' : ''}${u.is_private ? ' <span class="muted" title="Privado">🔒</span>' : ''}
-                      <div class="muted">${esc(u.full_name)}${u.ts ? `${u.full_name ? ' · ' : ''}desde ${new Date(u.ts * 1000).toLocaleDateString()}` : ''}</div>
+                      <a href="${BASE}/${esc(u.username)}/" target="_blank" rel="noopener">@${esc(u.username)}</a>${u.is_verified ? ` <span title="${t('verified')}">✔</span>` : ''}${u.is_private ? ` <span class="muted" title="${t('private')}">🔒</span>` : ''}
+                      <div class="muted">${esc(u.full_name)}${u.ts ? `${u.full_name ? ' · ' : ''}${t('since', new Date(u.ts * 1000).toLocaleDateString(locale()))}` : ''}</div>
                     </div>
-                    <span class="tag ${mutual ? 'mut' : ''}">${mutual ? 'Mútuo' : isFollowing ? 'Não te segue' : 'Não segues'}</span>
+                    <span class="tag ${mutual ? 'mut' : ''}">${mutual ? t('tagMutual') : isFollowing ? t('tagNotFollowingYou') : t('tagNotFollowing')}</span>
                   </li>`;
                 })
                 .join('')
-            : `<li class="empty">${state.following.length || state.followers.length ? 'Nada com estes filtros.' : 'Clique em “Carregar do Instagram” ou importe a exportação oficial.'}</li>`
+            : `<li class="empty">${state.following.length || state.followers.length ? t('emptyFilter') : t('emptyNoData')}</li>`
         }
       </ul>
-      ${list.length > state.shown ? `<button data-act="more" class="more">Mostrar mais (${list.length - state.shown} restantes)</button>` : ''}
+      ${list.length > state.shown ? `<button data-act="more" class="more">${t('more', list.length - state.shown)}</button>` : ''}
       <details class="settings">
-        <summary>Ritmo e limites (hoje: ${state.daily.date === today() ? state.daily.count : 0}/${state.settings.dailyLimit})</summary>
+        <summary>${t('pace', state.daily.date === today() ? state.daily.count : 0, state.settings.dailyLimit)}</summary>
         <div class="grid">
-          <label>Espera mínima (s) <input type="number" min="10" class="set" data-k="minDelay" value="${state.settings.minDelay}" ${state.running ? 'disabled' : ''}></label>
-          <label>Espera máxima (s) <input type="number" min="10" class="set" data-k="maxDelay" value="${state.settings.maxDelay}" ${state.running ? 'disabled' : ''}></label>
-          <label>Limite por dia <input type="number" min="1" class="set" data-k="dailyLimit" value="${state.settings.dailyLimit}" ${state.running ? 'disabled' : ''}></label>
+          <label>${t('minDelay')} <input type="number" min="10" class="set" data-k="minDelay" value="${state.settings.minDelay}" ${state.running ? 'disabled' : ''}></label>
+          <label>${t('maxDelay')} <input type="number" min="10" class="set" data-k="maxDelay" value="${state.settings.maxDelay}" ${state.running ? 'disabled' : ''}></label>
+          <label>${t('perDay')} <input type="number" min="1" class="set" data-k="dailyLimit" value="${state.settings.dailyLimit}" ${state.running ? 'disabled' : ''}></label>
         </div>
-        <p class="muted">Ritmo lento reduz o risco de bloqueio. Se o Instagram pedir para abrandar, a fila para sozinha.</p>
-        <p class="muted">O FollowTidy não tem qualquer ligação ao Instagram ou à Meta. Os dados ficam só neste navegador.</p>
+        <p class="muted">${t('paceNote')}</p>
+        <p class="muted">${t('disclaimer')}</p>
       </details>
       <div class="status ${state.statusKind}" aria-live="polite">${esc(state.status)}</div>
     `;
@@ -518,16 +685,16 @@
   }
 
   function onClick(e) {
-    const t = e.target.closest('button');
-    if (!t) return;
-    if (t.dataset.tab) {
-      if (state.tab !== t.dataset.tab) state.selected.clear();
-      state.tab = t.dataset.tab;
+    const el = e.target.closest('button');
+    if (!el) return;
+    if (el.dataset.tab) {
+      if (state.tab !== el.dataset.tab) state.selected.clear();
+      state.tab = el.dataset.tab;
       state.shown = PAGE_SIZE;
       resetScroll = true;
       return render();
     }
-    switch (t.dataset.act) {
+    switch (el.dataset.act) {
       case 'close':
         return toggle();
       case 'refresh':
@@ -536,13 +703,13 @@
         return exportCsv();
       case 'stop':
         state.stopRequested = true;
-        return setStatus('A parar…');
+        return setStatus(t('stopping'));
       case 'run':
         {
           const other = OTHER[state.tab];
           const mut = state.both ? [...state.selected].filter((k) => state[other].some((u) => key(u) === k)).length : 0;
-          const extra = mut ? `\n\nNas ${mut} conta(s) mútua(s), também: ${ACTIONS[other].verb.toLowerCase()} (${state.selected.size + mut} ações no total).` : '';
-          if (confirm(`${ACTIONS[state.tab].verb}: ${state.selected.size} conta(s), uma a cada ${state.settings.minDelay}–${state.settings.maxDelay}s?${extra}`)) runQueue();
+          const extra = mut ? t('confirmExtra', mut, ACTIONS[other].verb.toLowerCase(), state.selected.size + mut) : '';
+          if (confirm(t('confirmRun', ACTIONS[state.tab].verb, state.selected.size, state.settings.minDelay, state.settings.maxDelay) + extra)) runQueue();
         }
         return;
       case 'selnone':
@@ -555,32 +722,37 @@
   }
 
   function onChange(e) {
-    const t = e.target;
-    if (t.classList.contains('sel')) {
-      t.checked ? state.selected.add(t.dataset.k) : state.selected.delete(t.dataset.k);
+    const el = e.target;
+    if (el.classList.contains('sel')) {
+      el.checked ? state.selected.add(el.dataset.k) : state.selected.delete(el.dataset.k);
       render();
-    } else if (t.classList.contains('selall')) {
+    } else if (el.classList.contains('selall')) {
       const visible = currentList().list.slice(0, state.shown);
-      for (const u of visible) t.checked ? state.selected.add(key(u)) : state.selected.delete(key(u));
+      for (const u of visible) el.checked ? state.selected.add(key(u)) : state.selected.delete(key(u));
       render();
-    } else if (t.classList.contains('bothchk')) {
-      state.both = t.checked;
+    } else if (el.classList.contains('lang')) {
+      state.settings.lang = el.value;
+      saveSettings();
+      setStatus('');
       render();
-    } else if (t.classList.contains('sort')) {
-      state.sort = t.value;
+    } else if (el.classList.contains('bothchk')) {
+      state.both = el.checked;
+      render();
+    } else if (el.classList.contains('sort')) {
+      state.sort = el.value;
       state.shown = PAGE_SIZE;
       resetScroll = true;
       render();
-    } else if (t.classList.contains('filter')) {
-      state.filter = t.value;
+    } else if (el.classList.contains('filter')) {
+      state.filter = el.value;
       state.shown = PAGE_SIZE;
       resetScroll = true;
       render();
-    } else if (t.classList.contains('import') && t.files.length) {
-      importFiles([...t.files]);
-    } else if (t.classList.contains('set')) {
-      const v = Math.max(Number(t.min) || 1, Math.round(Number(t.value) || 0));
-      state.settings[t.dataset.k] = v;
+    } else if (el.classList.contains('import') && el.files.length) {
+      importFiles([...el.files]);
+    } else if (el.classList.contains('set')) {
+      const v = Math.max(Number(el.min) || 1, Math.round(Number(el.value) || 0));
+      state.settings[el.dataset.k] = v;
       if (state.settings.maxDelay < state.settings.minDelay) state.settings.maxDelay = state.settings.minDelay;
       saveSettings();
       render();
@@ -616,9 +788,9 @@
     .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.45); }
     .panel { position: fixed; top: 0; right: 0; height: 100vh; width: min(560px, 100vw); background: #fff; color: #111;
       display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; box-shadow: -4px 0 24px rgba(0,0,0,.25); font-size: 14px; }
-    @media (prefers-color-scheme: dark) { .panel { background: #121212; color: #f2f2f2; } .list li { border-color: #2a2a2a; }
-      button, .btn, select, input { background: #262626; color: #f2f2f2; border-color: #3a3a3a; } }
     header { display: flex; align-items: center; justify-content: space-between; }
+    .head-actions { display: flex; align-items: center; gap: 6px; }
+    select.lang { padding: 4px 6px; }
     h1 { font-size: 18px; margin: 0; }
     .toolbar, .filters, .selbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     button, .btn { border: 1px solid #ccc; background: #f5f5f5; color: inherit; border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 13px; }
@@ -648,5 +820,19 @@
     .both { display: flex; align-items: center; gap: 4px; font-size: 12px; flex-basis: 100%; }
     .status.err { color: #ed4956; }
     .status.ok { color: #1e7b34; }
+    /* Tema escuro: tem de vir no fim para se sobrepor às regras acima com a mesma especificidade. */
+    @media (prefers-color-scheme: dark) {
+      .panel { background: #121212; color: #f2f2f2; }
+      button, .btn, select, input { background: #262626; color: #f2f2f2; border-color: #3a3a3a; }
+      .primary { background: #0095f6; border-color: #0095f6; color: #fff; }
+      .danger { background: #ed4956; border-color: #ed4956; color: #fff; }
+      .icon { background: none; }
+      .tabs .on { background: #f2f2f2; color: #111; border-color: #f2f2f2; }
+      .list li { border-color: #2a2a2a; }
+      .list img, .ph { background: #333; }
+      .tag { background: #3b1d21; color: #ff8a95; }
+      .tag.mut { background: #16351f; color: #7ee2a0; }
+      .status.ok { color: #4ade80; }
+    }
   `;
 })();

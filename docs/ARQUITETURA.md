@@ -89,4 +89,4 @@ O nome de utilizador sai de `title`, de `string_list_data[0].value` ou do `href`
 ## Limitações
 - Os endpoints são internos e não documentados. Podem mudar a qualquer momento: a lista de alternativas reduz o impacto disso, mas não o elimina.
 - Automatizar ações vai contra os termos de uso do Instagram. O risco principal é um bloqueio temporário de ações.
-- A interface está só em português. Os `_locales` traduzem apenas o nome e a descrição.
+- A interface está em português e inglês: os textos vivem num dicionário `STR` em `content.js` e a função `t()` escolhe o idioma (o seletor PT/EN do painel, guardado nas definições, ou o idioma do navegador). Os `_locales` traduzem o nome e a descrição na loja.

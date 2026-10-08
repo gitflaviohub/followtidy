@@ -10,6 +10,7 @@ Extensão de navegador (Chrome, Edge, Brave, Opera e Firefox 128+) para gerir qu
 - Seleção múltipla para **deixar de seguir** ou **remover seguidor**. Nos mútuos, pode fazer as duas ações de uma vez
 - Fila lenta com espera aleatória (por omissão 30–60 s) e limite diário (por omissão 100). A fila para sozinha se o Instagram pedir para abrandar
 - Exportação para CSV
+- Interface em português ou inglês, com seletor PT/EN no painel (por omissão segue o idioma do navegador)
 - Nunca pede a senha. Os dados ficam só no navegador, sem servidor
 
 ## Instalar (modo programador)
