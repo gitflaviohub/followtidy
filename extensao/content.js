@@ -788,8 +788,6 @@
     .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.45); }
     .panel { position: fixed; top: 0; right: 0; height: 100vh; width: min(560px, 100vw); background: #fff; color: #111;
       display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; box-shadow: -4px 0 24px rgba(0,0,0,.25); font-size: 14px; }
-    @media (prefers-color-scheme: dark) { .panel { background: #121212; color: #f2f2f2; } .list li { border-color: #2a2a2a; }
-      button, .btn, select, input { background: #262626; color: #f2f2f2; border-color: #3a3a3a; } }
     header { display: flex; align-items: center; justify-content: space-between; }
     .head-actions { display: flex; align-items: center; gap: 6px; }
     select.lang { padding: 4px 6px; }
@@ -822,5 +820,19 @@
     .both { display: flex; align-items: center; gap: 4px; font-size: 12px; flex-basis: 100%; }
     .status.err { color: #ed4956; }
     .status.ok { color: #1e7b34; }
+    /* Tema escuro: tem de vir no fim para se sobrepor às regras acima com a mesma especificidade. */
+    @media (prefers-color-scheme: dark) {
+      .panel { background: #121212; color: #f2f2f2; }
+      button, .btn, select, input { background: #262626; color: #f2f2f2; border-color: #3a3a3a; }
+      .primary { background: #0095f6; border-color: #0095f6; color: #fff; }
+      .danger { background: #ed4956; border-color: #ed4956; color: #fff; }
+      .icon { background: none; }
+      .tabs .on { background: #f2f2f2; color: #111; border-color: #f2f2f2; }
+      .list li { border-color: #2a2a2a; }
+      .list img, .ph { background: #333; }
+      .tag { background: #3b1d21; color: #ff8a95; }
+      .tag.mut { background: #16351f; color: #7ee2a0; }
+      .status.ok { color: #4ade80; }
+    }
   `;
 })();
