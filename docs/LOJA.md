@@ -35,7 +35,7 @@ O FollowTidy ajuda a arrumar a sua lista de seguidores no instagram.com, diretam
 
 Privacidade: o FollowTidy usa a sessão que já tem aberta e nunca pede a sua senha. Tudo fica guardado só no seu navegador, sem servidores, publicidade nem rastreamento.
 
-Como usar: abra o instagram.com com a sua conta, clique no ícone do FollowTidy e depois em "Carregar do Instagram".
+Como usar: abra o instagram.com com a sua conta, clique no ícone do FollowTidy e depois em "Carregar do Instagram". A interface está em português e inglês.
 
 Aviso: o FollowTidy não tem qualquer ligação ao Instagram ou à Meta. Ações automáticas podem levar o Instagram a limitar temporariamente a sua conta. Mantenha um ritmo lento e use por sua conta e risco.
 
@@ -66,7 +66,7 @@ FollowTidy helps you tidy up your follower list on instagram.com, right in your 
 
 Privacy: FollowTidy uses the session you already have open and never asks for your password. Everything stays in your browser, with no servers, ads or tracking.
 
-How to use: open instagram.com signed in, click the FollowTidy icon, then "Carregar do Instagram" (Load from Instagram). The interface is in Portuguese.
+How to use: open instagram.com signed in, click the FollowTidy icon, then "Load from Instagram". The interface is available in English and Portuguese (PT/EN switch in the panel).
 
 Disclaimer: FollowTidy is not affiliated with Instagram or Meta. Automated actions may lead Instagram to temporarily limit your account. Keep a slow pace and use at your own risk.
 
